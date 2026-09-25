@@ -30,6 +30,7 @@ public class ProductServiceImpl implements ProductService {
 
     // TODO Câu 4: Cache kết quả - log dưới đây chỉ được in ra khi thực sự truy vấn DB
     @Override
+    @org.springframework.cache.annotation.Cacheable(value = "products", key = "#id")
     public ProductResponse getProductById(Long id) {
         log.info("Querying DB for product id={}", id);
         return ProductResponse.from(findProduct(id));
@@ -51,6 +52,7 @@ public class ProductServiceImpl implements ProductService {
     // TODO Câu 4: Cập nhật cache khi sửa sản phẩm
     @Override
     @Transactional
+    @org.springframework.cache.annotation.CacheEvict(value = "products", key = "#id")
     public ProductResponse updateProduct(Long id, ProductRequest request) {
         Product product = findProduct(id);
         product.setName(request.getName());
@@ -63,6 +65,7 @@ public class ProductServiceImpl implements ProductService {
     // TODO Câu 4: Xoá cache khi xoá sản phẩm
     @Override
     @Transactional
+    @org.springframework.cache.annotation.CacheEvict(value = "products", key = "#id")
     public void deleteProduct(Long id) {
         Product product = findProduct(id);
         productRepository.delete(product);
@@ -72,6 +75,7 @@ public class ProductServiceImpl implements ProductService {
     // TODO Câu 4: Tồn kho thay đổi -> cache phải được cập nhật hoặc xoá
     @Override
     @Transactional
+    @org.springframework.cache.annotation.CacheEvict(value = "products", key = "#id")
     public ProductResponse decreaseStock(Long id, int quantity) {
         Product product = findProduct(id);
         if (product.getStock() < quantity) {
@@ -88,6 +92,7 @@ public class ProductServiceImpl implements ProductService {
     // TODO Câu 4: Tồn kho thay đổi -> cache phải được cập nhật hoặc xoá
     @Override
     @Transactional
+    @org.springframework.cache.annotation.CacheEvict(value = "products", key = "#id")
     public ProductResponse increaseStock(Long id, int quantity) {
         Product product = findProduct(id);
         product.setStock(product.getStock() + quantity);

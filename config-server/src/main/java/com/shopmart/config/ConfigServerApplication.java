@@ -3,7 +3,7 @@ package com.shopmart.config;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-// TODO Câu 1: Khai báo annotation để bật Config Server
+@org.springframework.cloud.config.server.EnableConfigServer
 @SpringBootApplication
 public class ConfigServerApplication {
 

@@ -38,12 +38,30 @@
             <optional>true</optional>
         </dependency>
 
-        <!--
-            TODO Câu 1: spring-cloud-starter-config, spring-cloud-starter-netflix-eureka-client
-            TODO Câu 3: spring-kafka
-            TODO Câu 3 (Nâng cao): reactor-kafka + spring-boot-starter-webflux (consumer reactive)
-            TODO Câu 4: spring-boot-starter-data-redis, spring-boot-starter-cache
-        -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

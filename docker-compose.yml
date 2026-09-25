@@ -11,18 +11,36 @@ services:
     image: mysql:8.0
     container_name: shopmart-mysql
     environment:
-      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_ROOT_PASSWORD: '123456'
     ports:
-      - "3306:3306"
+      - "3308:3306"
     volumes:
       - mysql_data:/var/lib/mysql
 
-  # TODO Câu 3: Khởi tạo Kafka broker
-  #   - zookeeper (vd: confluentinc/cp-zookeeper) - cổng 2181
-  #   - kafka     (vd: confluentinc/cp-kafka)     - cổng 9092, phụ thuộc zookeeper
+  redis:
+    image: redis:7-alpine
+    container_name: shopmart-redis
+    ports:
+      - "6380:6379"
 
-  # TODO Câu 4: Khởi tạo Redis server
-  #   - redis (vd: redis:7-alpine) - cổng 6379
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.5.0
+    container_name: shopmart-zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+
+  kafka:
+    image: confluentinc/cp-kafka:7.5.0
+    container_name: shopmart-kafka
+    ports:
+      - "9093:9092"
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9093
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
 volumes:
   mysql_data:

@@ -4,7 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 
-// TODO Câu 1: Đăng ký service vào Eureka
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+
+@EnableDiscoveryClient
 @SpringBootApplication
 @ConfigurationPropertiesScan
 public class PaymentServiceApplication {
