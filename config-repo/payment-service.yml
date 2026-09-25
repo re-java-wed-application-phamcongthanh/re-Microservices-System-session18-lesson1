@@ -6,7 +6,9 @@ spring:
     url: jdbc:mysql://localhost:3308/shopmart_payment?createDatabaseIfNotExist=true
     username: root
     password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
     hibernate:
       ddl-auto: update
     show-sql: false
